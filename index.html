@@ -1,0 +1,273 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<!--
+http://www.flickgame.org/play.html?p=bd4ba58af0aefd62fe86
+http://www.flickgame.org/play.html?p=a67103bd3a8f48fe0393
+http://www.flickgame.org/play.html?p=a8874df5ffa82dddbaee
+http://www.flickgame.org/play.html?p=a1756af1d8f3fee89431
+http://www.flickgame.org/play.html?p=9353ad86b9ef3408148a
+http://www.flickgame.org/play.html?p=13c13acbc265e103803a
+http://www.flickgame.org/play.html?p=98189a3ccc45e304c553
+http://www.flickgame.org/play.html?p=76a33cc1cb449e404a88
+http://www.flickgame.org/play.html?p=b04db5604457a1faec56
+
+final version:
+http://www.flickgame.org/play.html?p=0e944a71389c598467eb
+-->
+<style>
+.messageouter {
+    width:100%;
+
+    /* Firefox */
+    display:-moz-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+
+    /* Safari and Chrome */
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+
+    /* W3C */
+    display:box;
+    box-pack:center;
+    box-align:center;
+}
+
+.date {
+	text-align: center;
+	color:gray;
+}
+
+.wait {
+	position:relative;
+	text-align: center;
+	margin:5px;
+	border-radius:5px;
+	padding:5px;
+}
+.waitlink {
+	position:relative;
+	margin:5px;
+	border:1px solid black;
+	border-radius:20px;
+	padding:5px;
+}
+
+.messagewindow {
+  width:500px;
+}
+.messageboxleft {
+	position:relative;
+	left:0%;
+	width:70%;
+	margin:5px;
+	border:1px solid black;
+	border-radius:5px;
+	padding:5px;
+	min-height: 50px;
+}
+.messageboxright {
+	position:relative;
+	left:30%;
+	width:70%;
+	margin:5px;
+	border:1px solid black;
+	border-radius:5px;
+	padding:5px;
+	width:70%;
+	min-height: 50px;
+}
+.iconleft{ 
+	display:inline-block;
+	float:left;
+	width:50px;
+	margin-right: 5px;
+	height:50px;
+	left:0;
+	background-color:pink;
+}
+.iconright {
+	margin-left: 5px;
+	display:inline-block;
+	float:right;
+	right:0;
+	width:50px;
+	height:50px;
+	background-color:orange;
+}
+.options {
+	position:relative;
+	left:30%;
+	width:70%;
+	margin:5px;
+	border:1px solid black;
+	border-radius:5px;
+	padding:5px;
+	width:70%;
+	min-height: 50px;
+}
+</style>
+<script>
+
+var options = [
+	["time","Saturday 2:13am"],
+	["options",
+		"Yaaaar - I'm home",
+		"Hey, I got back home",
+		"Yo, back in one piece"
+	],
+	["time","Saturday 2:15am"],
+	["options",
+		"Thanks for the great night out",
+		"You're lovely!",
+		"Was a pleasure to meet you"],
+	["time","Saturday 2:20am"],
+	["options",
+		"Is everything ok?",
+		"Ping",
+		"Yo!"],
+	["time","Saturday 2:35am"],
+	["options",
+		"Are you there?",
+		"Hey hey!",
+		"PING PING"],
+	["time","Saturday 2:52am"],
+	["options",
+		"Hey, is everything ok?",
+		"What's up?",
+		"Are you alright?"],
+	["time","Saturday 3:01am"],
+	["options",
+		"Did I do something wrong?",
+		"What happened?",
+		"Are you still up?"],
+	["time","Saturday 3:15am"],
+	["options",
+		"Hey, did I do something wrong?",
+		"Are you annoyed with me?",
+		"Why aren't you messagine me?"],
+	["time","Saturday 3:30am"],
+	["options",
+		"Did I say something wrong?",
+		"I thought you were really cool :(",
+		"PING"],
+	["time","Saturday 3:45am"],
+	["options",
+		"I thought you might like me - guess I was dumb",
+		"I was looking forward to meet you again :(",
+		"Maybe I should have gone home with you..."],
+	["time","Saturday 3:48am"],
+	["options",
+		"If you thought I was ugly, you should have just said so!",
+		"I suppose I wasn't your \"type\" then",
+		"You're as shallow as the rest of them"],
+	["time","Saturday 3:51am"],
+	["options",
+		"Wanna bang now?",
+		"Gimme a call if you wanna have sex now?",
+		"🍆"],
+	["time","Saturday 4:00am	"],
+	["options",
+		"you know what fuck you",
+		"fuck you you don't know what you're missing",
+		"you really blew it!"],
+	["time","Saturday 4:03am"],
+	["options",
+		"selfish cunt",
+		"you're so fucking rude",
+		"I'll just have to find someone else"],
+	["time","Saturday 4:05am"],
+	["options",
+		"fuck you!",
+		"fuck you!",
+		"fuck you!"]
+]
+
+var position=0
+
+var helper = document.createElement('div');
+function append(str){
+	var foo = document.getElementById("options");
+	var parent = foo.parentNode;
+	helper.innerHTML = str;
+	while (helper.firstChild) {
+	    parent.insertBefore(helper.firstChild, foo);
+	}
+}
+
+function setOptions(){
+	waitEl = document.getElementById("wait");
+	optionsEl = document.getElementById("options");
+	endingEl = document.getElementById("ending");
+	if (position===options.length){	
+		waitEl.style.display="none";
+		optionsEl.style.display="none";
+		endingEl.style.display="";
+	} else if (options[position][0]==="time"){
+		waitEl.style.display="";
+		optionsEl.style.display="none";
+		endingEl.style.display="none";	
+	} else {
+		waitEl.style.display="none";
+		optionsEl.style.display="";
+		endingEl.style.display="none";	
+		optionsEl.innerHTML = '<ul><li><a onclick="progress(1)" href="#scrollto">'+options[position][1]+'</a></li><li><a onclick="progress(2)" href="#scrollto">'+options[position][2]+'</a></li><li><a onclick="progress(3)" href="#scrollto">'+options[position][3]+'</a></li></ul>';
+	}
+}
+function progress(choice) {
+	var line = options[position];
+	if (line[0]==="time"){
+		append('<div class="date">'+line[1]+"</div>");
+	} else {
+		append('<div class="messageboxright"><div class="iconright"></div>'+line[choice]+'</div>');
+	}
+
+	position++;
+	setOptions();
+}
+
+function init(){
+	setOptions();
+}
+
+window.onload = init;
+</script>
+</head>
+<body>
+	<div class="messageouter">
+	<div class="messagewindow">
+		<div class="date">
+		Friday 14:29pm
+		</div>
+		<div class="messageboxleft">
+		<div class="iconleft"></div>
+		See you at 8?
+		</div>
+		<div class="messageboxright">
+		<div class="iconright"></div>
+		Sounds good! See you there :3 
+		</div>
+		<div class="messageboxleft">
+		<div class="iconleft"></div>
+		It's a date :D
+		</div>
+		<div id="options" class="options">
+			<ul>
+				<li><a href="">Oh no</a></li>
+				<li><a href="">What have I done?</a></li>
+				<li><a href="">Ah god</a></li>
+			</ul>
+		</div>		
+		<div id="wait" class="wait">
+		<a onclick="progress(0)" href="#scrollto" class="waitlink">. . .</a>
+		</div>
+		<div id="ending" class="wait">
+		<a href="area2.html" class="waitlink">. . .</a>		
+		</div>
+		<div  id="scrollto"></div>
+	</div>
+	</div>
+</body>
+</html>
